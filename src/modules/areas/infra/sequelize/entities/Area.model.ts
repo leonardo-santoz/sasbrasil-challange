@@ -13,7 +13,7 @@ import {
 
 import User from '@modules/users/infra/sequelize/entities/User.model';
 
-@Table
+@Table({ tableName: 'areas' })
 class Area extends Model<Area> {
 
     @PrimaryKey

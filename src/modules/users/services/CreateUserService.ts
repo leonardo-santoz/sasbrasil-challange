@@ -13,13 +13,13 @@ class CreateUserService {
         private usersRepository: IUsersRepository,
     ) { }
 
-    public async execute(createUserData: ICreateUserDTO): Promise<User> {
+    public async createUser(createUserData: ICreateUserDTO): Promise<User> {
         const userFromRepo = await this.usersRepository
             .findByEmail(createUserData.email);
 
-        const userExists = userFromRepo?.email;
+        const userId = userFromRepo?.email;
 
-        if (userExists)
+        if (userId)
             throw new Error('E-mail already in use');
 
         await sendMailTo(createUserData.email);

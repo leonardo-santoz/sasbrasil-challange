@@ -1,4 +1,4 @@
-import User  from '@modules/users/infra/sequelize/entities/User.model';
+import User from '@modules/users/infra/sequelize/entities/User.model';
 
 import {
     Model,
@@ -12,7 +12,7 @@ import {
     Table, HasMany
 } from "sequelize-typescript";
 
-@Table
+@Table({ tableName: 'positions' })
 class Position extends Model<Position> {
 
     @PrimaryKey

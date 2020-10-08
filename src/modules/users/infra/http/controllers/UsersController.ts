@@ -11,9 +11,9 @@ export default class UsersController {
         const userCreateRequestBody = request.body;
 
         try {
-            const createUser = container.resolve(CreateUserService);
+            const createUserService = container.resolve(CreateUserService);
 
-            const user = await createUser.execute(userCreateRequestBody);
+            const user = await createUserService.createUser(userCreateRequestBody);
 
             delete user.password
 
@@ -24,9 +24,9 @@ export default class UsersController {
     }
 
     public async listAll(request: Request, response: Response): Promise<Response> {
-        const userService = container.resolve(ListAllUsersService);
+        const listAllUserService = container.resolve(ListAllUsersService);
 
-        const users = await userService.listAll();
+        const users = await listAllUserService.listAll();
 
         return response.json(users);
     }
