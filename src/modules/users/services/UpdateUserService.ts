@@ -3,7 +3,6 @@ import { hash } from 'bcryptjs';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUpdateUserDTO from '@modules/users/dtos/IUpdateUserDTO';
-import User from '@modules/users/infra/sequelize/entities/User.model';
 
 @injectable()
 class UpdateUserService {
