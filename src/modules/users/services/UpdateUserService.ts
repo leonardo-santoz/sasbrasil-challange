@@ -16,9 +16,9 @@ class UpdateUserService {
         const userFromRepo = await this.usersRepository
             .findById(id);
 
-        const userExists = userFromRepo?.id
+        const userId = userFromRepo?.id
 
-        if (!userExists)
+        if (!userId)
             throw new Error('User not exists or id is incorrect')
 
         await this.usersRepository.update(id, updateUserData)
