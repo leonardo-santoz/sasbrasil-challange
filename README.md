@@ -26,7 +26,7 @@
 <h3>Configure o banco de dados</h3>
 <ol>
     <li>docker run --name sasbrasil_db -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:alpine</li>
-    <li>docker exec -it asbrasil_db bash</li>
+    <li>docker exec -it sasbrasil_db bash</li>
     <li>psql -U postgres</li>
     <li>create database sasbrasil_db</li>
 </ol>
