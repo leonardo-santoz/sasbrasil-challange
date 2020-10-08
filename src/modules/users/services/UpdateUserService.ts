@@ -22,9 +22,6 @@ class UpdateUserService {
             throw new Error('User not exists or id is incorrect')
 
         await this.usersRepository.update(id, updateUserData)
-        
-        console.log('user', updateUserData)
-
     }
 }
 

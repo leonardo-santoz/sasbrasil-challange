@@ -39,9 +39,13 @@ class UsersRepository implements IUsersRepository {
     }
 
     public async update(id: string, data: IUpdateUserDTO): Promise<void> {
-        await User.update(
+       const userUpdated = await User.update(
             {
-                data
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                phone_number: data.phone_number,
+                position_id: data.position_id
             },
             {
                 where: { id: id }

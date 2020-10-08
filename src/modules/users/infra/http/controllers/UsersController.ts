@@ -15,6 +15,8 @@ export default class UsersController {
 
             const user = await createUser.execute(userCreateRequestBody);
 
+            delete user.password
+
             return response.json(user);
         } catch (err) {
             return response.status(400).json({ error: err.message });
@@ -36,9 +38,9 @@ export default class UsersController {
         try {
             const updatedUserService = container.resolve(UpdateUserService);
     
-            const updatedUser = updatedUserService.updateUser(id, UpdatedUserDataRequest)
-    
-            return response.json(updatedUser);
+            updatedUserService.updateUser(id, UpdatedUserDataRequest)
+
+            return response.status(200).send();
         } catch (err) {
             return response.status(400).json({ error: err.message });
         }
