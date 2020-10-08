@@ -5,8 +5,6 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import User from '@modules/users/infra/sequelize/entities/User.model';
 
-
-
 @injectable()
 class CreateUserService {
     constructor(
@@ -15,11 +13,13 @@ class CreateUserService {
     ) { }
 
     public async execute(createUserData: ICreateUserDTO): Promise<User> {
-        // const verifyUserExists = this.usersRepository
-        //     .findByEmail(createUserData.email);
+        const userFromRepo = await this.usersRepository
+            .findByEmail(createUserData.email);
 
-        // if (verifyUserExists)
-        //     throw Error('E-mail already in use');
+        const userExists = userFromRepo?.email;
+
+        if (userExists)
+            throw new Error('E-mail already in use');
 
         const hashedPassword = await hash(createUserData.password, 8);
 

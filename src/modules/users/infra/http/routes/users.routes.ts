@@ -7,5 +7,6 @@ const usersController = new UsersController();
 
 usersRouter.post('/', usersController.create);
 usersRouter.get('/', usersController.listAll);
+usersRouter.put('/:id', usersController.update);
 
 export default usersRouter;

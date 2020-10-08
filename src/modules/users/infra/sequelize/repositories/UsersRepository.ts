@@ -1,5 +1,6 @@
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
+import IUpdateUserDTO from '@modules/users/dtos/IUpdateUserDTO';
 
 import User from '../entities/User.model';
 
@@ -37,13 +38,15 @@ class UsersRepository implements IUsersRepository {
         return user;
     }
 
-    // public async update(id: string): Promise<User> {
-    //     const user = await this.findByid(id);
-
-    //     const userUpdated = await this.sequelizeRepository.update(user);
-
-    //     return userUpdated;
-    // }
+    public async update(id: string, data: IUpdateUserDTO): Promise<void> {
+        await User.update(
+            {
+                data
+            },
+            {
+                where: { id: id }
+            });
+    }
 
     public async delete(id: string): Promise<void> {
         await User.destroy({
