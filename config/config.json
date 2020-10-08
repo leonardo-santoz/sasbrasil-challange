@@ -1,0 +1,7 @@
+{
+    "dialect": "postgres",
+    "username": "postgres",
+    "password": "saspostgres@",
+    "database": "sasbrasil_db",
+    "host": "localhost"
+}
