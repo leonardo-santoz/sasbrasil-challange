@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe';
-import { hash } from 'bcryptjs';
 
 import IPositionsRepository from '@modules/positions/repositories/IPositionsRepository';
 import ICreatePositionDTO from '@modules/positions/dtos/ICreatePositionDTO';

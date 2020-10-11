@@ -1,4 +1,4 @@
 export default interface IUpdatePositionDTO {
-    name: string;
+    name?: string;
     description?: string;
 }
