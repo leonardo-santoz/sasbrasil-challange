@@ -4,6 +4,7 @@ import { hash } from 'bcryptjs';
 import IPositionsRepository from '@modules/positions/repositories/IPositionsRepository';
 import ICreatePositionDTO from '@modules/positions/dtos/ICreatePositionDTO';
 import Position from '@modules/positions/infra/sequelize/entities/Position.model';
+import AppError from '@shared/errors/AppError';
 
 @injectable()
 class CreatePositionService {
@@ -19,7 +20,7 @@ class CreatePositionService {
         const nameExists = positionFromRepo?.name;
 
         if (nameExists)
-            throw new Error('Name already in use.');
+            throw new AppError('Name already in use.');
 
         const position = await this.positionsRepository.create(createPositionData)
 

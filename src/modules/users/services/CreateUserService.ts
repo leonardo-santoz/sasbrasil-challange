@@ -4,6 +4,7 @@ import { hash } from 'bcryptjs';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import User from '@modules/users/infra/sequelize/entities/User.model';
+import AppError from '@shared/errors/AppError';
 import { sendMailTo } from '@shared/providers/MailProvider/nodemailer';
 
 @injectable()
@@ -20,7 +21,7 @@ class CreateUserService {
         const userId = userFromRepo?.email;
 
         if (userId)
-            throw new Error('E-mail already in use');
+            throw new AppError('E-mail already in use');
 
         await sendMailTo(createUserData.email);
 

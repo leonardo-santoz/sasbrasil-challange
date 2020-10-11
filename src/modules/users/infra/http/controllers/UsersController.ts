@@ -10,17 +10,13 @@ export default class UsersController {
     public async create(request: Request, response: Response): Promise<Response> {
         const userCreateRequestBody = request.body;
 
-        try {
-            const createUserService = container.resolve(CreateUserService);
+        const createUserService = container.resolve(CreateUserService);
 
-            const user = await createUserService.createUser(userCreateRequestBody);
+        const user = await createUserService.createUser(userCreateRequestBody);
 
-            delete user.password
+        delete user.password
 
-            return response.json(user);
-        } catch (err) {
-            return response.status(400).json({ error: err.message });
-        }
+        return response.json(user);
     }
 
     public async listAll(request: Request, response: Response): Promise<Response> {
@@ -34,29 +30,21 @@ export default class UsersController {
     public async update(request: Request, response: Response): Promise<Response> {
         const { id } = request.params
         const UpdatedUserDataRequest = request.body
-        
-        try {
-            const updatedUserService = container.resolve(UpdateUserService);
-    
-            updatedUserService.updateUser(id, UpdatedUserDataRequest)
 
-            return response.status(200).send();
-        } catch (err) {
-            return response.status(400).json({ error: err.message });
-        }
+        const updatedUserService = container.resolve(UpdateUserService);
+
+        updatedUserService.updateUser(id, UpdatedUserDataRequest)
+
+        return response.status(200).send();
     }
 
     public async delete(request: Request, response: Response): Promise<Response> {
         const { id } = request.params
 
-        try {
-            const deleteUserService = container.resolve(DeleteUserService)
+        const deleteUserService = container.resolve(DeleteUserService)
 
-            deleteUserService.deleteUser(id);
-            
-            return response.status(200).send();
-        } catch (err) {
-            return response.status(400).json({ error: err.message });
-        }
+        deleteUserService.deleteUser(id);
+
+        return response.status(200).send();
     }
 }

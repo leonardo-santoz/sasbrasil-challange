@@ -3,6 +3,7 @@ import { hash } from 'bcryptjs';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUpdateUserDTO from '@modules/users/dtos/IUpdateUserDTO';
+import AppError from '@shared/errors/AppError';
 
 @injectable()
 class UpdateUserService {
@@ -18,8 +19,8 @@ class UpdateUserService {
         const userId = userFromRepo?.id
 
         if (!userId)
-            throw new Error('User not exists or id is incorrect')
-
+            throw new AppError('User not exists or id is incorrect')
+        
         await this.usersRepository.update(id, updateUserData)
     }
 }
