@@ -39,7 +39,7 @@ class UsersRepository implements IUsersRepository {
     }
 
     public async update(id: string, data: IUpdateUserDTO): Promise<void> {
-       const userUpdated = await User.update(
+        const userUpdated = await User.update(
             {
                 name: data.name,
                 email: data.email,
