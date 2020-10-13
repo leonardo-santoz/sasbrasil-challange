@@ -8,10 +8,12 @@ import {
     AllowNull,
     IsUUID,
     ForeignKey,
-    Table
+    Table,
+    HasMany
 } from "sequelize-typescript";
 
 import User from '@modules/users/infra/sequelize/entities/User.model';
+import Position from '@modules/positions/infra/sequelize/entities/Position.model';
 
 @Table({ tableName: 'areas' })
 class Area extends Model<Area> {
@@ -37,6 +39,9 @@ class Area extends Model<Area> {
     @ForeignKey(() => User)
     @Column
     cordinator_id: number;
+
+    @HasMany(() => Position)
+    users: User[]
 
     @CreatedAt
     created_at: Date;

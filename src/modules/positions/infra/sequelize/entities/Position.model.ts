@@ -1,4 +1,5 @@
 import User from '@modules/users/infra/sequelize/entities/User.model';
+import Area from '@modules/areas/infra/sequelize/entities/Area.model';
 
 import {
     Model,
@@ -9,7 +10,9 @@ import {
     UpdatedAt,
     AllowNull,
     IsUUID,
-    Table, HasMany
+    Table, 
+    HasMany,
+    ForeignKey
 } from "sequelize-typescript";
 
 @Table({ tableName: 'positions' })
@@ -31,6 +34,14 @@ class Position extends Model<Position> {
 
     @HasMany(() => User)
     users: User[]
+
+    @AllowNull(false)
+    @ForeignKey(() => Area)
+    @Column
+    area_id: number;
+
+    @Column
+    area: string;
 
     @CreatedAt
     created_at: Date;

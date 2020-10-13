@@ -1,10 +1,10 @@
+import { inject, injectable } from 'tsyringe';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUpdateUserDTO from '@modules/users/dtos/IUpdateUserDTO';
 import IPositionsRepository from '@modules/positions/repositories/IPositionsRepository';
 
 import User from '../entities/User.model';
-import { inject, injectable } from 'tsyringe';
 
 @injectable()
 class UsersRepository implements IUsersRepository {

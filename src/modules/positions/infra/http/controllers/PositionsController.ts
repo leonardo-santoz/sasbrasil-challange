@@ -5,11 +5,11 @@ import PositionsService from '@modules/positions/services/PositionsService';
 
 export default class PositionsController {
     public async create(request: Request, response: Response): Promise<Response> {
-        const { name, description } = request.body;
+        const { name, description, area_id } = request.body;
 
         const positionsService = container.resolve(PositionsService);
 
-        const position = await positionsService.create({ name, description });
+        const position = await positionsService.create({ name, description, area_id });
 
         return response.json(position);
     }
@@ -34,11 +34,11 @@ export default class PositionsController {
 
     public async update(request: Request, response: Response): Promise<Response> {
         const { id } = request.params
-        const { name, description } = request.body
+        const { name, description, area_id } = request.body
 
         const positionsService = container.resolve(PositionsService);
 
-        positionsService.update(id, { name, description })
+        positionsService.update(id, { name, description, area_id })
 
         return response.status(200).send();
     }
