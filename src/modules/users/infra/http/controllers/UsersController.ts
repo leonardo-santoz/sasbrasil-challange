@@ -1,20 +1,15 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import CreateUserService from '@modules/users/services/CreateUserService';
-import ListAllUsersService from '@modules/users/services/ListAllUsersService';
-import UpdateUserService from '@modules/users/services/UpdateUserService';
-import DeleteUserService from '@modules/users/services/DeleteUserService';
-import ListByIdUserService from '@modules/users/services/ListByIdUserService';
-
+import UsersService from '@modules/users/services/UsersService';
 
 export default class UsersController {
     public async create(request: Request, response: Response): Promise<Response> {
         const userCreateRequestBody = request.body;
 
-        const createUserService = container.resolve(CreateUserService);
+        const userService = container.resolve(UsersService);
 
-        const user = await createUserService.createUser(userCreateRequestBody);
+        const user = await userService.create(userCreateRequestBody);
 
         delete user.password
 
@@ -24,7 +19,7 @@ export default class UsersController {
     public async listById(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
 
-        const userService = container.resolve(ListByIdUserService);
+        const userService = container.resolve(UsersService);
 
         const user = await userService.listById(id);
 
@@ -32,9 +27,9 @@ export default class UsersController {
     }
 
     public async listAll(request: Request, response: Response): Promise<Response> {
-        const listAllUserService = container.resolve(ListAllUsersService);
+        const userService = container.resolve(UsersService);
 
-        const users = await listAllUserService.listAll();
+        const users = await userService.listAll();
 
         return response.json(users);
     }
@@ -43,9 +38,9 @@ export default class UsersController {
         const { id } = request.params
         const UpdatedUserDataRequest = request.body
 
-        const updatedUserService = container.resolve(UpdateUserService);
+        const userService = container.resolve(UsersService);
 
-        updatedUserService.updateUser(id, UpdatedUserDataRequest)
+        userService.update(id, UpdatedUserDataRequest)
 
         return response.status(200).send();
     }
@@ -53,9 +48,9 @@ export default class UsersController {
     public async delete(request: Request, response: Response): Promise<Response> {
         const { id } = request.params
 
-        const deleteUserService = container.resolve(DeleteUserService)
+        const userService = container.resolve(UsersService)
 
-        deleteUserService.deleteUser(id);
+        userService.delete(id);
 
         return response.status(200).send();
     }

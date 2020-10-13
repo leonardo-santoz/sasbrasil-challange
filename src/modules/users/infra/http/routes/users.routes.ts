@@ -6,7 +6,7 @@ import { confirmAuthenticate } from '@modules/users/infra/http/middlewares/confi
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.use(confirmAuthenticate);
+// usersRouter.use(confirmAuthenticate);
 
 usersRouter.post('/', usersController.create);
 usersRouter.get('/:id', usersController.listById);
