@@ -17,7 +17,7 @@
 <h3>Clone este projeto</h3>
 <ol>
     <li>git clone </li>
-    <li>cd sasbrasil-apichallange</li>
+    <li>cd sasbrasilapichallange-api</li>
 </ol>
 
 <h3>Instale as dependências</h3>
