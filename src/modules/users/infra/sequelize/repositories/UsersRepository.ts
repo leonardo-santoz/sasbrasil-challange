@@ -1,12 +1,18 @@
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUpdateUserDTO from '@modules/users/dtos/IUpdateUserDTO';
+import IPositionsRepository from '@modules/positions/repositories/IPositionsRepository';
 
 import User from '../entities/User.model';
+import { inject, injectable } from 'tsyringe';
 
+@injectable()
 class UsersRepository implements IUsersRepository {
 
-    constructor() {
+    constructor(
+        @inject('PositionsRepository')
+        private positionsRepository: IPositionsRepository
+    ) {
         User.init;
     }
 
@@ -33,19 +39,25 @@ class UsersRepository implements IUsersRepository {
     }
 
     public async create(data: ICreateUserDTO): Promise<User> {
-        const user = await User.create(data);
+        const position = await this.positionsRepository.findById(data.position_id)
+
+        const user = {
+            ...data,
+            position: position?.name
+        }
+
+        await User.create(user);
 
         return user;
     }
 
     public async update(id: string, data: IUpdateUserDTO): Promise<void> {
-        const userUpdated = await User.update(
+        const position = await this.positionsRepository.findById(data.position_id)
+
+        await User.update(
             {
-                name: data.name,
-                email: data.email,
-                password: data.password,
-                phone_number: data.phone_number,
-                position_id: data.position_id
+                ...data,
+                position: position?.name
             },
             {
                 where: { id: id }

@@ -3,5 +3,5 @@ export default interface IUpdateUserDTO {
     email?: string;
     password?: string;
     phone_number?: string;
-    position_id?: string;
+    position_id: string;
 }

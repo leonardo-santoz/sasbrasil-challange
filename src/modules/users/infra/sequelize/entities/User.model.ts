@@ -47,6 +47,9 @@ class User extends Model<User> {
     @Column
     position_id: number;
 
+    @Column
+    position: string;
+
     // @BelongsTo(() => Area)
     // area: Area;
 
