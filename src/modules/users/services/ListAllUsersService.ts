@@ -12,7 +12,7 @@ class ListAllUsersService {
 
     public async listAll(): Promise<User[]> {
         const users = await this.usersRepository.findAll();
-
+        
         return users;
     }
 }

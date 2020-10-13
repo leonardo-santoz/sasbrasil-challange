@@ -45,7 +45,6 @@ export default class AreasController {
 
     public async delete(request: Request, response: Response): Promise<Response> {
         const { id } = request.params
-
         const areasService = container.resolve(AreasService)
 
         areasService.delete(id);

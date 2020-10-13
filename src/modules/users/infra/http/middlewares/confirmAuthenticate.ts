@@ -10,7 +10,7 @@ interface TokenPayload {
     sub: string;
 }
 
-const confirmAuthenticate = (
+export const confirmAuthenticate = (
     request: Request,
     response: Response,
     next: NextFunction): void => {
