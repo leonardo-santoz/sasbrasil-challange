@@ -38,6 +38,11 @@
     <li>yarn sequelize db:migrate</li>
 </ol>
 
+<h3>Execute o projeto</h3>
+<ol>
+    <li>yarn dev:server</li>
+</ol>
+
 <h2>Para testar as rotas...</h2>
 <ol>
     <li>Instale o <a href="https://insomnia.rest/download/">insomnia core</a>, execute-o e importe o arquivo sasbrasil-docs.json</li>
