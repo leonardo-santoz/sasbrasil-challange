@@ -36,9 +36,15 @@ class Area extends Model<Area> {
     @Column
     manager_id: number;
 
+    @Column
+    manager: string;
+
     @ForeignKey(() => User)
     @Column
     cordinator_id: number;
+
+    @Column
+    cordinator: string;
 
     @HasMany(() => Position)
     users: User[]

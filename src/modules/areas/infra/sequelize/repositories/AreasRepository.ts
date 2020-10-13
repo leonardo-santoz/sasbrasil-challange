@@ -39,12 +39,14 @@ class AreasRepository implements IAreasRepository {
     }
 
     public async update(id: string, data: IUpdateAreaDTO): Promise<void> {
-        const AreaUpdated = await Area.update(
+       await Area.update(
             {
                 name: data.name,
                 description: data.description,
                 manager_id: data.manager_id,
-                cordinator_id: data.cordinator_id
+                cordinator_id: data.cordinator_id,
+                cordinator: data.cordinator,
+                manager: data.manager
             },
             {
                 where: { id: id }

@@ -4,6 +4,7 @@ import IPositionsRepository from '@modules/positions/repositories/IPositionsRepo
 import ICreatePositionDTO from '@modules/positions/dtos/ICreatePositionDTO';
 import IUpdatePositionDTO from '@modules/positions/dtos/IUpdatePositionDTO';
 import Position from '@modules/positions/infra/sequelize/entities/Position.model';
+import IAreasRepository from '@modules/areas/repositories/IAreasRepositories';
 import AppError from '@shared/errors/AppError';
 
 @injectable()
@@ -11,6 +12,8 @@ class PositionsService {
     constructor(
         @inject('PositionsRepository')
         private positionsRepository: IPositionsRepository,
+        @inject('AreasRepository')
+        private areasRepository: IAreasRepository
     ) { }
 
     public async create(createPositionData: ICreatePositionDTO): Promise<Position> {
@@ -22,18 +25,28 @@ class PositionsService {
         if (nameExists)
             throw new AppError('Name already in use.');
 
-        const position = await this.positionsRepository.create(createPositionData)
+        const area = await this.areasRepository.findById(createPositionData.area_id);
+
+        if(!area)
+            throw new AppError('Incorrect area id');
+
+        const position = {
+            ...createPositionData,
+            area: area?.name
+        }
+
+        await this.positionsRepository.create(position);
 
         return position;
     }
 
     public async listById(id: string): Promise<Position | null> {
-        const position = await this.positionsRepository.findById(id)
+        const position = await this.positionsRepository.findById(id);
 
-        const positionId = position?.id
+        const positionId = position?.id;
 
         if (!positionId)
-            throw new AppError('Position not exists or id is incorrect')
+            throw new AppError('Position not exists or id is incorrect');
 
         return position;
     }
@@ -53,7 +66,17 @@ class PositionsService {
         if (!positionId)
             throw new AppError('Position not exists or id is incorrect')
 
-        await this.positionsRepository.update(id, updatePositionData)
+        const area = await this.areasRepository.findById(updatePositionData.area_id);
+
+        if(!area)
+            throw new AppError('Incorrect area id');
+
+        const position = {
+            ...updatePositionData,
+            area: area?.name
+        }
+
+        await this.positionsRepository.update(id, position)
     }
 
     public async delete(id: string): Promise<void> {

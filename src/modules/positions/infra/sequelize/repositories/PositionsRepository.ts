@@ -1,19 +1,12 @@
-import { inject, injectable } from 'tsyringe';
 import IPositionsRepository from '@modules/positions/repositories/IPositionsRepository';
 import ICreatePositionDTO from '@modules/positions/dtos/ICreatePositionDTO';
 import IUpdatePositionDTO from '@modules/positions/dtos/IUpdatePositionDTO';
-import IAreasRepository from '@modules/areas/repositories/IAreasRepositories';
 
 import Position from '../entities/Position.model';
 
-@injectable()
 class PositionsRepository implements IPositionsRepository {
 
-    constructor(
-        @inject('AreasRepository')
-        private areasRepository: IAreasRepository
-
-    ) {
+    constructor() {
         Position.init;
     }
 
@@ -40,25 +33,18 @@ class PositionsRepository implements IPositionsRepository {
     }
 
     public async create(data: ICreatePositionDTO): Promise<Position> {
-        const area = await this.areasRepository.findById(data.area_id)
-
-        const position = {
-            ...data,
-            area: area?.name
-        }
-
-        await Position.create(position);
+        const position = await Position.create(data);
 
         return position;
     }
 
     public async update(id: string, data: IUpdatePositionDTO): Promise<void> {
-        const area = await this.areasRepository.findById(data.area_id)
-        console.log('chegou')
         await Position.update(
             {
-                ...data,
-                area: area?.name
+                name: data.name,
+                description: data.description,
+                area_id: data.area_id,
+                area: data.area
             },
             {
                 where: { id: id }
