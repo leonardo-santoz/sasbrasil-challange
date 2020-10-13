@@ -21,7 +21,15 @@ class UpdateUserService {
         if (!userId)
             throw new AppError('User not exists or id is incorrect')
         
-        await this.usersRepository.update(id, updateUserData)
+        let hashedPassword = '';
+
+        if(updateUserData.password) 
+            hashedPassword = await hash(updateUserData.password, 8);
+
+        await this.usersRepository.update(id, {
+            ...updateUserData, 
+            password: hashedPassword
+        })
     }
 }
 

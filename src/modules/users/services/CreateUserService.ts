@@ -23,7 +23,7 @@ class CreateUserService {
         if (userId)
             throw new AppError('E-mail already in use');
 
-        await sendMailTo(createUserData.email);
+        // await sendMailTo(createUserData.email);
 
         const hashedPassword = await hash(createUserData.password, 8);
 
