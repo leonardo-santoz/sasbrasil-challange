@@ -1,13 +1,15 @@
 <h1>SAS BRASIL CHALLANGE</h1>
 
 <h2>Descrição</h2>
-<p>Projeto criado para a companhia SAS BRASIL como forma de participamento no processo seletivo para Programador Júnior.</p>
+<p>Projeto criado para a companhia SAS BRASIL como forma de participação no processo seletivo para Programador Júnior.</p>
 
+<h2>Status</h2>
+<p>Projeto em andamento</p>
 
 <h2>Pré-requisitos</h2>
 <a href="https://www.docker.com/products/docker-desktop">Docker</a>
 <a href="https://classic.yarnpkg.com/en/docs/install/#mac-stable">Yarn</a>
-<a href="https://git-scm.com/downloads">Gitt</a>
+<a href="https://git-scm.com/downloads">Git</a>
 <a href="https://nodejs.org/en/download/">Node</a>
 
 <h2>Como usar</h2>
@@ -26,9 +28,9 @@
 <h3>Configure o banco de dados</h3>
 <ol>
     <li>docker run --name sasbrasil_db -e POSTGRES_PASSWORD=saspostgres@ -p 5432:5432 -d postgres:alpine</li>
-    <li>docker exec -it sasbrasil_db bash</li>
-    <li>psql -U postgres</li>
-    <li>create database sasbrasil_db</li>
+    <li>Abra um gerenciador de banco de dados de sua preferência. Sugiro fortmente o <a href="https://dbeaver.io/">dbeaver</a></li>
+    <li>Crie uma conexão postgres utilizando database postgres e password saspostgres@</li>
+    <li>crie uma database com o nome sasbrasil_db</li>
 </ol>
 
 <h3>Execute as migrations</h3>
