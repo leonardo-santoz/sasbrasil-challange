@@ -9,9 +9,9 @@ const areasController = new AreasController();
 areasRouter.use(confirmAuthenticate);
 
 areasRouter.post('/', areasController.create);
-areasRouter.get('/:id', areasController.listById);
-areasRouter.get('/', areasController.listAll);
-areasRouter.put('/:id', areasController.update);
-areasRouter.delete('/:id', areasController.delete);
+areasRouter.get('/:id', confirmAuthenticate, areasController.listById);
+areasRouter.get('/', confirmAuthenticate, areasController.listAll);
+areasRouter.put('/:id', confirmAuthenticate, areasController.update);
+areasRouter.delete('/:id', confirmAuthenticate, areasController.delete);
 
 export default areasRouter;

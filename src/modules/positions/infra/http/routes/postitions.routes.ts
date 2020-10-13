@@ -6,12 +6,10 @@ import { confirmAuthenticate } from '@modules/users/infra/http/middlewares/confi
 const positionsRouter = Router();
 const positionsController = new PositionsController();
 
-positionsRouter.use(confirmAuthenticate);
-
 positionsRouter.post('/', positionsController.create);
-positionsRouter.get('/:id', positionsController.listById);
-positionsRouter.get('/', positionsController.listAll);
-positionsRouter.put('/:id', positionsController.update);
-positionsRouter.delete('/:id', positionsController.delete);
+positionsRouter.get('/:id', confirmAuthenticate, positionsController.listById);
+positionsRouter.get('/', confirmAuthenticate, positionsController.listAll);
+positionsRouter.put('/:id', confirmAuthenticate, positionsController.update);
+positionsRouter.delete('/:id', confirmAuthenticate, positionsController.delete);
 
 export default positionsRouter;
